@@ -1,3 +1,10 @@
+---
+name: planning-dashboard
+description: 'Scan planning documents, parse YAML frontmatter, and regenerate docs/planning/*/_index.md dashboard files with current pipeline status summaries.'
+argument-hint: 'No arguments. Example: /planning-dashboard'
+user-invocable: true
+---
+
 # Skill: planning-dashboard
 
 ## Trigger

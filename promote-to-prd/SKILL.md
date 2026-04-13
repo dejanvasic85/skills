@@ -1,3 +1,10 @@
+---
+name: promote-to-prd
+description: 'Run an interview-style conversation to promote an idea into a formal PRD under docs/planning/prds/. Conducts three rounds of questions before writing.'
+argument-hint: 'Idea number or file path (optional). Example: 2026-04-add-llms-txt.md'
+user-invocable: true
+---
+
 # Skill: promote-to-prd
 
 ## Trigger
