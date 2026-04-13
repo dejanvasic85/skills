@@ -1,3 +1,10 @@
+---
+name: plan-execution
+description: 'Generate a detailed execution plan for a PRD, broken into phased tasks with specific file paths and verification steps.'
+argument-hint: 'PRD number or file path. Example: 09 or docs/planning/prds/09-add-llms-txt.md'
+user-invocable: true
+---
+
 # Skill: plan-execution
 
 ## Trigger

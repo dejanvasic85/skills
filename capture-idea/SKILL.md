@@ -1,3 +1,10 @@
+---
+name: capture-idea
+description: 'Capture a raw idea quickly into docs/planning/ideas/ with a date-prefixed filename and YAML frontmatter. Use when the user says "I have an idea", "capture idea", "new idea", or invokes /capture-idea.'
+argument-hint: 'Raw idea text (optional). Example: Add onboarding checklist to dashboard'
+user-invocable: true
+---
+
 # Skill: capture-idea
 
 ## Trigger
