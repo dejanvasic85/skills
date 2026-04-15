@@ -56,7 +56,19 @@ Filename format: `YYYY-MM-slug.md` using today's date for YYYY-MM.
 
 Use the template at `docs/planning/templates/idea.md`. Populate all frontmatter fields. Write concise content under each section heading based on what you found in the codebase — do not leave sections as empty placeholders. Leave `prd: ""` blank (filled when promoted).
 
-### Step 5 — Confirm
+### Step 5 — Update the index
+
+After creating the file, always update `docs/planning/ideas/_index.md`:
+
+- Read all `.md` files in `docs/planning/ideas/` (excluding `_index.md`)
+- Parse each file's frontmatter to extract `title`, `status`, `priority`, and `domain`
+- Rewrite `_index.md` with:
+  - Updated `updated` date in frontmatter
+  - A summary table with counts per status
+  - An ideas table listing all entries (title, status, priority, domain, filename link)
+- If `_index.md` does not exist, create it using this structure
+
+### Step 6 — Confirm
 
 Tell the user the file was created at `docs/planning/ideas/YYYY-MM-slug.md` and ask if they want to immediately evaluate it (status: evaluating) or leave it as captured for later triage.
 
@@ -101,4 +113,3 @@ Valid domain values: `seo | engineering | content | design | infrastructure`
 - Ideas directory: `docs/planning/ideas/`
 - Template: `docs/planning/templates/idea.md`
 - Date prefix uses YYYY-MM (year-month) not full date — ideas are a chronological stream
-- After creation, update `docs/planning/ideas/_index.md` dashboard if it exists (or note it needs updating)
