@@ -62,7 +62,6 @@ status: planning
 priority: [from PRD]
 created: 'YYYY-MM-DD'
 updated: 'YYYY-MM-DD'
-owner: '[from PRD]'
 prd: '[PRD filename]'
 started: ''
 completed: ''

@@ -45,10 +45,9 @@ Scan `docs/planning/prds/` for existing files. The next number is the highest ex
 
 Ask these questions (skip any already answered by the idea file):
 
-1. "Who is this for? (end users, client, internal team)"
-2. "What problem does this solve, and how urgent is it?"
-3. "What's the desired outcome — what does success look like?"
-4. "Are there any constraints (budget, timeline, dependencies on other work)?"
+1. "What problem does this solve, and how urgent is it?"
+2. "What's the desired outcome — what does success look like?"
+3. "Are there any constraints (budget, timeline, dependencies on other work)?"
 
 After receiving answers, summarise what was captured and ask: "Is there anything I've missed or misunderstood before we continue?"
 
@@ -69,8 +68,7 @@ Final clarifications:
 
 1. "How will we verify this is done correctly? (specific acceptance criteria)"
 2. "What priority should this carry? (critical / high / medium / low)"
-3. "Who owns this work?"
-4. "Any dependencies on other PRDs that must complete first?"
+3. "Any dependencies on other PRDs that must complete first?"
 
 After receiving answers, summarise and confirm you have enough to write the PRD.
 
@@ -84,7 +82,6 @@ Only after completing all three rounds, generate the PRD:
 - `status`: `draft`
 - `priority`: from Round 3
 - `depends-on`: list of PRD numbers from Round 3
-- `owner`: from Round 3
 - `idea`: filename of source idea (e.g., `2026-04-add-llms-txt.md`)
 - `created` / `updated`: today's date
 - Infer `domain` and `tags` from context
@@ -119,7 +116,6 @@ priority: medium
 phase: ''
 created: 'YYYY-MM-DD'
 updated: 'YYYY-MM-DD'
-owner: ''
 idea: ''
 plan: ''
 depends-on: []
