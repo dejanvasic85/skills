@@ -46,7 +46,7 @@ From the description and codebase context, determine:
 
 - **slug**: kebab-case from the title (e.g., "Add llms.txt file" → `add-llms-txt-file`)
 - **domain**: one of `seo | engineering | content | design | infrastructure`
-- **source**: one of `client-request | analytics | competitor-research | internal | seo-data`
+- **source**: one of `analytics | competitor-research | internal | seo-data`
 - **priority**: default `unset` unless the user signals urgency
 - **status**: always `captured` on creation
 
@@ -89,7 +89,7 @@ tags: []
 
 Valid status values: `captured | evaluating | accepted | rejected | deferred`
 Valid priority values: `critical | high | medium | low | unset`
-Valid source values: `client-request | analytics | competitor-research | internal | seo-data`
+Valid source values: `analytics | competitor-research | internal | seo-data`
 Valid domain values: `seo | engineering | content | design | infrastructure`
 
 ## Template Sections
