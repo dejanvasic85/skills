@@ -14,25 +14,22 @@ This will present an interactive menu to select which skills to install.
 
 ### Planning pipeline
 
-A three-stage workflow for going from raw idea to executable plan.
+A two-stage workflow for going from raw idea to executable plan.
 
 | Skill | Slash command | Description |
 |---|---|---|
-| `capture-idea` | `/capture-idea` | Capture a raw idea into `docs/planning/ideas/` with YAML frontmatter |
-| `promote-to-prd` | `/promote-to-prd` | Run an interview to promote an idea into a formal PRD |
-| `plan-execution` | `/plan-execution` | Generate a phased execution plan for an approved PRD |
-| `planning-dashboard` | `/planning-dashboard` | Regenerate the `_index.md` status dashboards across all planning stages |
+| `plan-idea` | `/plan-idea` | Capture a raw idea into `docs/planning/ideas/` with YAML frontmatter |
+| `plan-from-idea` | `/plan-from-idea` | Generate a phased execution plan directly from an idea |
+| `plan-dashboard` | `/plan-dashboard` | Regenerate the `_index.md` status dashboards for ideas and plans |
 
 **Typical flow:**
 
 ```
-/capture-idea Add dark mode toggle
+/plan-idea Add dark mode toggle
     ↓
-/promote-to-prd
+/plan-from-idea
     ↓
-/plan-execution
-    ↓
-/planning-dashboard
+/plan-dashboard
 ```
 
 ### Engineering

@@ -1,11 +1,11 @@
 ---
-name: capture-idea
-description: 'Capture a raw idea quickly into docs/planning/ideas/ with a date-prefixed filename and YAML frontmatter. Use when the user says "I have an idea", "capture idea", "new idea", or invokes /capture-idea.'
+name: plan-idea
+description: 'Capture a raw idea quickly into docs/planning/ideas/ with a date-prefixed filename and YAML frontmatter. Use when the user says "I have an idea", "capture idea", "new idea", or invokes /plan-idea.'
 argument-hint: 'Raw idea text (optional). Example: Add onboarding checklist to dashboard'
 user-invocable: true
 ---
 
-# Skill: capture-idea
+# Skill: plan-idea
 
 ## Trigger
 
@@ -14,11 +14,11 @@ Use this skill when the user says:
 - "I have an idea"
 - "capture idea"
 - "new idea"
-- invokes `/capture-idea`
+- invokes `/plan-idea`
 
 ## Purpose
 
-Capture a raw idea quickly into `docs/planning/ideas/` with a date-prefixed filename and YAML frontmatter. Ideas are stage 1 of the planning pipeline: captured → evaluated → promoted to PRD.
+Capture a raw idea quickly into `docs/planning/ideas/` with a date-prefixed filename and YAML frontmatter. Ideas are stage 1 of the planning pipeline: captured → plan.
 
 ## Output
 
@@ -47,30 +47,29 @@ From the description and codebase context, determine:
 - **slug**: kebab-case from the title (e.g., "Add llms.txt file" → `add-llms-txt-file`)
 - **domain**: one of `seo | engineering | content | design | infrastructure`
 - **source**: one of `analytics | competitor-research | internal | seo-data`
-- **priority**: default `unset` unless the user signals urgency
 - **status**: always `captured` on creation
 
 ### Step 4 — Create the file
 
 Filename format: `YYYY-MM-slug.md` using today's date for YYYY-MM.
 
-Use the template at `docs/planning/templates/idea.md`. Populate all frontmatter fields. Write concise content under each section heading based on what you found in the codebase — do not leave sections as empty placeholders. Leave `prd: ""` blank (filled when promoted).
+Use the template at `docs/planning/templates/idea.md`. Populate all frontmatter fields. Write concise content under each section heading based on what you found in the codebase — do not leave sections as empty placeholders. Leave `plan: ""` blank (filled when planned).
 
 ### Step 5 — Update the index
 
 After creating the file, always update `docs/planning/ideas/_index.md`:
 
 - Read all `.md` files in `docs/planning/ideas/` (excluding `_index.md`)
-- Parse each file's frontmatter to extract `title`, `status`, `priority`, and `domain`
+- Parse each file's frontmatter to extract `title`, `status`, and `domain`
 - Rewrite `_index.md` with:
   - Updated `updated` date in frontmatter
   - A summary table with counts per status
-  - An ideas table listing all entries (title, status, priority, domain, filename link)
+  - An ideas table listing all entries (title, status, domain, filename link)
 - If `_index.md` does not exist, create it using this structure
 
 ### Step 6 — Confirm
 
-Tell the user the file was created at `docs/planning/ideas/YYYY-MM-slug.md` and ask if they want to immediately evaluate it (status: evaluating) or leave it as captured for later triage.
+Tell the user the file was created at `docs/planning/ideas/YYYY-MM-slug.md` and ask if they want to immediately create an execution plan (`/plan-from-idea`).
 
 ## Frontmatter Schema
 
@@ -78,17 +77,15 @@ Tell the user the file was created at `docs/planning/ideas/YYYY-MM-slug.md` and 
 ---
 title: ''
 status: captured
-priority: unset
 source: internal
 captured: 'YYYY-MM-DD'
 domain: seo
-prd: ''
+plan: ''
 tags: []
 ---
 ```
 
-Valid status values: `captured | evaluating | accepted | rejected | deferred`
-Valid priority values: `critical | high | medium | low | unset`
+Valid status values: `captured | in-progress | completed | deferred`
 Valid source values: `analytics | competitor-research | internal | seo-data`
 Valid domain values: `seo | engineering | content | design | infrastructure`
 
