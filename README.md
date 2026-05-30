@@ -32,6 +32,12 @@ A two-stage workflow for going from raw idea to executable plan.
 /plan-dashboard
 ```
 
+### Invoicing
+
+| Skill | Slash command | Description |
+|---|---|---|
+| `git-invoice` | `/git-invoice` | Scan git logs for a period and produce categorised invoice line items (Maintenance / Feature Work with size estimates) |
+
 ### Engineering
 
 | Skill | Slash command | Description |
