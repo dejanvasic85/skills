@@ -90,7 +90,6 @@ updated: 'YYYY-MM-DD'
 idea: '[idea filename]'
 started: ''
 completed: ''
-estimated-hours: ''
 tags: [from idea]
 ---
 ```
