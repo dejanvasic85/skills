@@ -32,6 +32,12 @@ A two-stage workflow for going from raw idea to executable plan.
 /plan-dashboard
 ```
 
+### SEO / GEO
+
+| Skill | Slash command | Description |
+|---|---|---|
+| `seo-scorecard` | `/seo-scorecard` | Write the monthly SEO/GEO scorecard from fresh GSC + GA4 exports, diffed against the prior month and verified against live CMS content rather than plan checkboxes |
+
 ### Invoicing
 
 | Skill | Slash command | Description |
