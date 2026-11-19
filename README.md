@@ -50,3 +50,4 @@ A two-stage workflow for going from raw idea to executable plan.
 |---|---|---|
 | `fix-renovate-pr` | `/fix-renovate-pr` | Diagnose and fix failing Renovate dependency-upgrade PRs |
 | `pr-comment-resolution` | `/pr-comment-resolution` | Address, reply to, and resolve pull-request feedback |
+| `resolve-sentry-issue` | `/resolve-sentry-issue` | Triage a new, regressed or escalating Sentry issue: fix it, filter it, or stop and ask |
