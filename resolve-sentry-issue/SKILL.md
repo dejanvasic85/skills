@@ -36,6 +36,7 @@ Then act on what you find:
 |---|---|
 | The issue is assigned to a person, or has a note starting `Waiting on a human` | Stop. A person owns it now. |
 | An open pull request names the issue | Stop. The fix is waiting for review. |
+| A merged fix that no release has shipped yet | Stop. Sentry resolves the issue when the release ships. |
 | A merged fix, and every new event comes from a release older than the fix release | Resolve the issue in the fix release, add a note, stop. |
 | A merged fix, and new events come from the fix release or later | Go to [Stop rules](#stop-rules). The fix did not work. |
 | Nothing | Go on. |
