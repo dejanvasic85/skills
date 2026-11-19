@@ -19,7 +19,7 @@ Archiving or ignoring an issue is never the outcome. An archived issue returns w
 ## Inputs
 
 - A Sentry issue short ID or URL, or a wake-up payload that names one.
-- With none: list unresolved issues by event count and take them one at a time. One issue, one pull request.
+- With none: list unresolved, unassigned issues (`is:unresolved is:unassigned`) by event count and take them one at a time. One issue, one pull request.
 
 ## Steps
 
@@ -34,6 +34,7 @@ Then act on what you find:
 
 | Found | Do |
 |---|---|
+| The issue is assigned to a person, or has a note starting `Waiting on a human` | Stop. A person owns it now. |
 | An open pull request names the issue | Stop. The fix is waiting for review. |
 | A merged fix, and every new event comes from a release older than the fix release | Resolve the issue in the fix release, add a note, stop. |
 | A merged fix, and new events come from the fix release or later | Go to [Stop rules](#stop-rules). The fix did not work. |
@@ -66,7 +67,7 @@ Add one note to the Sentry issue: the class, the cause in one line, and the pull
 
 ## Stop rules
 
-Stop, add a note, and ask the human (assign the issue to them, or use the project's usual channel) when:
+Stop, assign the issue to the human, and add a note that starts `Waiting on a human:` with the question. Later runs skip an assigned issue, so it is not triaged again. Do this when:
 
 - the issue came back on a release that has its fix. A second fix on the same guess is how loops start, so the cause needs a person.
 - the cause is outside the code.
