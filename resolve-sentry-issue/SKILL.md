@@ -19,7 +19,7 @@ Archiving or ignoring an issue is never the outcome. An archived issue returns w
 ## Inputs
 
 - A Sentry issue short ID or URL, or a wake-up payload that names one.
-- With none: list unresolved, unassigned issues (`is:unresolved is:unassigned`) by event count and take them one at a time. One issue, one pull request.
+- With none: list unresolved, unassigned issues (`is:unresolved is:unassigned`) by event count and take them one at a time. One issue, one pull request. When step 1 says stop for an issue, skip it and take the next one.
 
 ## Steps
 
