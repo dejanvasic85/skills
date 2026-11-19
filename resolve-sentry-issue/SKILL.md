@@ -1,7 +1,7 @@
 ---
 name: resolve-sentry-issue
-description: 'Use when a Sentry issue is new, regressed or escalating, when a webhook or schedule wakes an agent for one, or when asked to work through open Sentry issues. Covers real bugs, expected errors that are only noise, bots and unsupported browsers, and issues that come back after a fix.'
-argument-hint: 'Sentry issue short ID or URL. Example: WEB-8. With none, works through unresolved issues one at a time.'
+description: "Use when a Sentry issue is new, regressed or escalating, when a webhook or schedule wakes an agent for one, or when asked to work through open Sentry issues. Covers real bugs, expected errors that are only noise, bots and unsupported browsers, and issues that come back after a fix."
+argument-hint: "Sentry issue short ID or URL. Example: WEB-8. With none, works through unresolved issues one at a time."
 user-invocable: true
 ---
 
@@ -15,6 +15,13 @@ Each run leaves the issue in a state that will not wake an agent again for the s
 - a note on the issue and a question to the human, when this skill says to stop.
 
 Archiving or ignoring an issue is never the outcome. An archived issue returns when it escalates, and every return is another wake-up.
+
+## Requirements
+
+- Sentry access that can read issues and events, add notes, assign and resolve: the Sentry MCP server or an API token.
+- GitHub access that can open pull requests.
+
+Without Sentry access, stop and say so. Setting it up is the environment's job, not this skill's.
 
 ## Inputs
 
@@ -32,14 +39,14 @@ Search before reading any code:
 
 Then act on what you find:
 
-| Found | Do |
-|---|---|
-| The issue is assigned to a person, or has a note starting `Waiting on a human` | Stop. A person owns it now. |
-| An open pull request names the issue | Stop. The fix is waiting for review. |
-| A merged fix that no release has shipped yet | Stop. Sentry resolves the issue when the release ships. |
-| A merged fix, and every new event comes from a release older than the fix release | Resolve the issue in the fix release, add a note, stop. |
-| A merged fix, and new events come from the fix release or later | Go to [Stop rules](#stop-rules). The fix did not work. |
-| Nothing | Go on. |
+| Found                                                                                               | Do                                                      |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| The issue is assigned to a person, or has a note starting `Waiting on a human` or `Kept on purpose` | Stop. It is already decided.                            |
+| An open pull request names the issue                                                                | Stop. The fix is waiting for review.                    |
+| A merged fix that no release has shipped yet                                                        | Stop. Sentry resolves the issue when the release ships. |
+| A merged fix, and every new event comes from a release older than the fix release                   | Resolve the issue in the fix release, add a note, stop. |
+| A merged fix, and new events come from the fix release or later                                     | Go to [Stop rules](#stop-rules). The fix did not work.  |
+| Nothing                                                                                             | Go on.                                                  |
 
 ### 2. Find the cause
 
@@ -47,12 +54,12 @@ Read the latest event, its stack trace and its tags (browser, release, URL, user
 
 ### 3. Classify it, then act
 
-| Class | Signs | Action |
-|---|---|---|
-| Real bug | Wrong behaviour that a person could hit | Fix the root cause in a pull request, using the project's task workflow. |
-| Expected behaviour | The code throws on purpose and the app already recovers (a refusal, a redirect, a "not found") | Filter it out of Sentry in code, in the SDK's `beforeSend`, in a pull request. Leave the app's behaviour alone. |
-| Unsupported client | Every event comes from a browser older than the build supports, or from a bot | Stop that client from reporting, for example by not starting the browser SDK when a feature the app needs is missing, in a pull request. |
-| Outside the code | A provider outage, a network blip, infrastructure | Go to [Stop rules](#stop-rules). |
+| Class              | Signs                                                                                          | Action                                                                                                                                                                                                                                                                                 |
+| ------------------ | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Real bug           | Wrong behaviour that a person could hit                                                        | Fix the root cause in a pull request, using the project's task workflow.                                                                                                                                                                                                               |
+| Expected behaviour | The code throws on purpose and the app already recovers (a refusal, a redirect, a "not found") | If the project's monitoring docs keep this kind of event on purpose (for example, as a warning), add a note starting `Kept on purpose:` and stop. Otherwise filter it out of Sentry in code, in the SDK's `beforeSend`, in a pull request. Leave the app's behaviour alone either way. |
+| Unsupported client | Every event comes from a browser older than the build supports, or from a bot                  | Stop that client from reporting, for example by not starting the browser SDK when a feature the app needs is missing, in a pull request.                                                                                                                                               |
+| Outside the code   | A provider outage, a network blip, infrastructure                                              | Go to [Stop rules](#stop-rules).                                                                                                                                                                                                                                                       |
 
 A filter or a skipped client is a fix in code, reviewed like any other. Write a test for it and document what is no longer reported where the project documents monitoring.
 
@@ -82,13 +89,13 @@ Never, in any case:
 
 ## Red flags
 
-| Thought | Reality |
-|---|---|
-| "It is only a warning, so I will leave it open." | Open means the next event wakes an agent again. Fix it, filter it, or stop and ask. |
-| "Filters hide errors, so I will not touch them." | A filter in code, reviewed in a pull request, is the fix for expected behaviour. |
-| "The app should return a value instead of throwing." | If the app already recovers, its behaviour is right. The report is the problem. |
-| "The last fix did not hold, so I will try another." | Stop and ask. The cause is not what it seemed. |
-| "Archive it until it escalates." | It will escalate, and you will be here again. |
+| Thought                                              | Reality                                                                             |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| "It is only a warning, so I will leave it open."     | Open means the next event wakes an agent again. Fix it, filter it, or stop and ask. |
+| "Filters hide errors, so I will not touch them."     | A filter in code, reviewed in a pull request, is the fix for expected behaviour.    |
+| "The app should return a value instead of throwing." | If the app already recovers, its behaviour is right. The report is the problem.     |
+| "The last fix did not hold, so I will try another."  | Stop and ask. The cause is not what it seemed.                                      |
+| "Archive it until it escalates."                     | It will escalate, and you will be here again.                                       |
 
 ## Note template
 
